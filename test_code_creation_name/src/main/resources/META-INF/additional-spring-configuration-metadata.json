@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "setting.lock.minute",
+    "type": "java.lang.String",
+    "description": "A description for 'setting.lock.minute'"
+  },
+  {
+    "name": "setting.lock.count",
+    "type": "java.lang.String",
+    "description": "A description for 'setting.lock.count'"
+  }
+]}
