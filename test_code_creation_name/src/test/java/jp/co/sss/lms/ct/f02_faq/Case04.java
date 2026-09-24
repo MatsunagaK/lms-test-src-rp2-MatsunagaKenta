@@ -60,18 +60,32 @@ public class Case04 {
 	@Order(3)
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
-		goTo("http://localhost:8888/lms/help");
+		webDriver.findElement(By.linkText("機能")).click();
+		webDriver.findElement(By.linkText("ヘルプ")).click();
+
+		pageLoadTimeout(10);
+
 		assertEquals("ヘルプ | LMS", webDriver.getTitle());
-		getEvidence(new Object() {});
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(4)
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
-		goTo("http://localhost:8888/lms/faq");
+		webDriver.findElement(By.linkText("よくある質問")).click();
+
+		pageLoadTimeout(10);
+
+		//開いているウェブページ数を取得
+		Object windowHandles[] = webDriver.getWindowHandles().toArray();
+		//最新のウェブページへ移動
+		webDriver.switchTo().window((String) windowHandles[1]);
+
 		assertEquals("よくある質問 | LMS", webDriver.getTitle());
-		getEvidence(new Object() {});
+		getEvidence(new Object() {
+		});
 	}
 
 }
