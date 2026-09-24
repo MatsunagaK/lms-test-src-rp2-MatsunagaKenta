@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 
-
 /**
  * 結合テスト よくある質問機能
  * ケース05
@@ -38,41 +37,84 @@ public class Case05 {
 	@Order(1)
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
-		// TODO ここに追加
+		goTo("http://localhost:8888/lms");
+		assertEquals("ログイン | LMS", webDriver.getTitle());
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(2)
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
-		// TODO ここに追加
+		webDriver.findElement(By.id("loginId")).sendKeys("StudentAA02");
+		webDriver.findElement(By.id("password")).sendKeys("studentAA02");
+		webDriver.findElement(By.className("btn-primary")).click();
+
+		pageLoadTimeout(10);
+
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+		getEvidence(new Object() {
+		});
 	}
-	
+
 	@Test
 	@Order(3)
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
-		// TODO ここに追加
+		webDriver.findElement(By.linkText("機能")).click();
+		webDriver.findElement(By.linkText("ヘルプ")).click();
+
+		pageLoadTimeout(10);
+
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
 	@Order(4)
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
-		// TODO ここに追加
+		webDriver.findElement(By.linkText("よくある質問")).click();
+
+		pageLoadTimeout(5);
+
+		//開いているウェブページ数を取得
+		Object windowHandles[] = webDriver.getWindowHandles().toArray();
+		//最新のウェブページへ移動
+		webDriver.switchTo().window((String) windowHandles[1]);
+
+		assertEquals("よくある質問 | LMS", webDriver.getTitle());
+		getEvidence(new Object() {
+		});
 	}
+
 	@Test
 	@Order(5)
 	@DisplayName("テスト05 キーワード検索で該当キーワードを含む検索結果だけ表示")
 	void test05() {
-		// TODO ここに追加
+		webDriver.findElement(By.name("keyword")).sendKeys("途中退校");
+		webDriver.findElement(By.className("btn-primary")).click();
+
+		pageLoadTimeout(10);
+
+		assertNotNull(webDriver.findElement(By.className("mr10")));
+		getEvidence(new Object() {
+		});
 	}
-	
+
 	@Test
 	@Order(6)
 	@DisplayName("テスト06 「クリア」ボタン押下で入力したキーワードを消去")
 	void test06() {
-		// TODO ここに追加
+		webDriver.findElement(By.xpath("//input[@value='クリア']")).click();
+
+		pageLoadTimeout(10);
+
+		assertEquals("", webDriver.findElement(By.name("keyword")).getText());
+		getEvidence(new Object() {
+		});
 	}
 
 }
