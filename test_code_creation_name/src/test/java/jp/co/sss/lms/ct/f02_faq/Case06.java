@@ -98,7 +98,8 @@ public class Case06 {
 		
 		pageLoadTimeout(10);
 		
-		assertNotNull(webDriver.findElement(By.className("mr10")));
+		assertEquals("キャンセル料・途中退校について",webDriver.findElement(By.xpath("//span[text()='キャンセル料・途中退校について']")).getText());
+		assertEquals("研修の申し込みはどのようにすれば良いですか？",webDriver.findElement(By.xpath("//span[text()='研修の申し込みはどのようにすれば良いですか？']")).getText());
 		getEvidence(new Object() {
 		});
 	}
@@ -109,7 +110,7 @@ public class Case06 {
 	void test06() {
 		webDriver.findElement(By.className("mr10")).click();
 		
-		assertNotNull(webDriver.findElement(By.className("dn")));
+		assertEquals("A.",webDriver.findElement(By.className("text-warning")).getText());
 		getEvidence(new Object() {
 		});
 	}

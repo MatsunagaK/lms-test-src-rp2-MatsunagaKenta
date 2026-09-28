@@ -99,7 +99,7 @@ public class Case05 {
 
 		pageLoadTimeout(10);
 
-		assertNotNull(webDriver.findElement(By.className("mr10")));
+		assertEquals("キャンセル料・途中退校について",webDriver.findElement(By.xpath("//span[text()='キャンセル料・途中退校について']")).getText());
 		getEvidence(new Object() {
 		});
 	}
@@ -112,7 +112,7 @@ public class Case05 {
 
 		pageLoadTimeout(10);
 
-		assertEquals("", webDriver.findElement(By.name("keyword")).getText());
+		assertEquals("", webDriver.findElement(By.name("keyword")).getAttribute("value"));
 		getEvidence(new Object() {
 		});
 	}
